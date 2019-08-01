@@ -12,7 +12,7 @@
 			 :name="item.name">
 				{{item.content}}
 			</el-tab-pane>-->
-
+			<!--此处循环的是router>index.js中的数据-->
 			<el-tab-pane 
 			v-for="(item,index) in this.$router.options.routes[0].children"
 			 :key="item.path"
@@ -56,9 +56,11 @@
 			}
 		},
 		mounted() {
-			console.log(this.$router.options.routes[0].children);
-			this.activeTab = this.$route.name;
-			this.tabsList = this.$router.options.routes[0].children;
+			// console.log(this.$router.options.routes[0].children);
+		},
+		created(){
+			// 刷新页面回到main路由上来
+			this.$router.push({name:'main'});
 		},
 		methods: {
 			removeTab(targetName) {
@@ -84,7 +86,7 @@
 			},
 			selectedTabHandle(tab, event) {
 				console.log(tab);
-				this.activeTab = tab.name;
+				
 				this.$router.push({
 					name: tab.name
 				});
